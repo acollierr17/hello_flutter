@@ -2,6 +2,9 @@
 
 A new Flutter project.
 
+## Example
+![](https://i.imgur.com/ONVAbo2.gif)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
