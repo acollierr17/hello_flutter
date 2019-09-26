@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-// import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
-void main() => runApp(MyApp());
+void main() => runApp(SimpleCounter());
 
-class MyApp extends StatelessWidget {
+class SimpleCounter extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Simple Counter',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -84,9 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text('Simple Counter v0.1'),
-          content: Padding(
-            padding: const EdgeInsets.only(top: 24.0),
+          title: new Text('Simple Counter v1.0'),
+          content: SingleChildScrollView(
             child: RichText(
               text: TextSpan(
                 children: <TextSpan>[
@@ -232,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return Text(
         _counter.toString(),
         style: TextStyle(
-          fontSize: 170
+          fontSize: 170,
         )
       );
     }
