@@ -65,6 +65,18 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _incrementCounterBy10() {
+   setState(() {
+     _counter += 10;
+   });
+  }
+
+  void _decrementCounterBy10() {
+    setState(() {
+      _counter -= 10;
+    });
+  }
+
   void _resetCounter() {
     setState(() {
       _counter = 0;
@@ -83,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text('Simple Counter v1.0'),
+          title: new Text('Simple Counter v0.1'),
           content: SingleChildScrollView(
             child: RichText(
               text: TextSpan(
@@ -172,7 +184,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               // 'Tap the buttons below to change the counter',
               'Made with ❤ by Anthony',
-              style: TextStyle(fontSize: 22)
+              style: TextStyle(
+                fontSize: 22,
+              ),
             ),
             _counterText(context)
           ],
@@ -184,23 +198,36 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              FloatingActionButton.extended(
-                onPressed: _decrementCounter,
-                tooltip: 'Decrement',
-                icon: Icon(Icons.remove),
-                label: Text('Dec'),
+              // So if we press down on 'Inc' or 'Dec' buttons, then the _counter variable will increase/decrease by 10
+              GestureDetector(
+                onLongPress: () {
+                  // print('Long press has been made to decrement!');
+                  _decrementCounterBy10();
+                },
+                child: FloatingActionButton.extended(
+                  onPressed: _decrementCounter,
+                  // tooltip: 'Decrement',
+                  icon: Icon(Icons.remove),
+                  label: Text('Dec'),
+                ),
               ),
               FloatingActionButton.extended(
                 onPressed: _resetCounter,
-                tooltip: 'Reset',
+                // tooltip: 'Reset',
                 icon: Icon(Icons.delete_forever),
                 label: Text('Clear'),
               ),
-              FloatingActionButton.extended(
-                onPressed: _incrementCounter,
-                tooltip: 'Increment',
-                icon: Icon(Icons.add),
-                label: Text('Inc'),
+              GestureDetector(
+                onLongPress: () {
+                  // print('Long press has been made to increment!');
+                  _incrementCounterBy10();
+                },
+                child: FloatingActionButton.extended(
+                  onPressed: _incrementCounter,
+                  // tooltip: 'Increment',
+                  icon: Icon(Icons.add),
+                  label: Text('Inc'),
+                )
               ),
             ],
           ),
@@ -210,6 +237,21 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _counterText(BuildContext context) {
+    /**
+     * Basically I want to check if a number is divisible by 10 (we're excluding 0)
+     * If so, do some cool shit?
+     */
+    if ((_counter % 10 == 0) && (_counter != 0)) {
+      // print('Hey! $_counter is divisible by 10!');
+      return Text(
+        _counter.toString(),
+        style: TextStyle(
+          fontSize: 210,
+          color: Colors.lightBlue
+        )
+      );
+    }
+
     if (_counter < 0) {
       return Text(
         _counter.toString(),
